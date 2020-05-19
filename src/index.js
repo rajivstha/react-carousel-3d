@@ -4,7 +4,7 @@ import './styles/style.scss';
 
 const isEqual = require("react-fast-compare");
 
-export default class Carousel extends React.Component {
+export class Carousel extends React.Component {
     
     constructor(props) {
         super(props)
@@ -22,7 +22,7 @@ export default class Carousel extends React.Component {
         this.props.slides.forEach(slide => {
             let slideobject = {
                 class:"slider-single proactivede",
-                element:slide
+                imagedata:slide
             }
             slides.push(slideobject);
         });
@@ -34,7 +34,7 @@ export default class Carousel extends React.Component {
         if(this.state.slideCurrent === -1)
         setTimeout(()=> {
             this.slideRight();
-            height:document.getElementsByClassName("slider-single")[0].clientHeight;
+           height:document.getElementsByClassName("slider-single")[0].clientHeight;
         }, 500);
     }
 
@@ -45,7 +45,7 @@ export default class Carousel extends React.Component {
           this.props.slides.forEach((slide) => {
               let slideobject = {
                   class:"slider-single proactivede",
-                  element:slide
+                  imagedata:slide
               }
               slides.push(slideobject);
           });
@@ -60,7 +60,7 @@ export default class Carousel extends React.Component {
           });
           setTimeout(()=> {
               this.slideRight();
-              height:document.getElementsByClassName("slider-single")[0].clientHeight;
+             height:document.getElementsByClassName("slider-single")[0].clientHeight;
           }, 500);
         }
       }
@@ -68,7 +68,6 @@ export default class Carousel extends React.Component {
 
     slideRight () {
         if(this.state.count+1 >= this.props.slides.length){
-            console.log('more')
             this.setState({
                 ...this.state,
                 count: 0
@@ -195,12 +194,12 @@ export default class Carousel extends React.Component {
         }
        
     }
+
     render() {
-        console.log(this.state.count)
         return (
         <>  
             <div className="leftContent">
-        <h2>{this.props.slideTexts[this.state.count]}</h2>
+                <h2>{this.props.slideTexts[this.state.count]}</h2>
             </div>
             <div className="rightContent">
                 <div className="sliderContainer">
@@ -208,7 +207,9 @@ export default class Carousel extends React.Component {
                     {this.state.slides && this.state.slides.length > 0 &&
                         <div className="slider-container">
                             <div className="slider-content">
+                          
                                 {this.state.slides.map((slider,index)=>{
+                                    
                                     return (
                                         <div className={slider.class} key={index}>
                                             <div className="slider-left" onClick={this.slideLeft.bind(this)}>
@@ -223,7 +224,7 @@ export default class Carousel extends React.Component {
                                             </div>
 
                                             <div className="slider-single-content">
-                                                {slider.element}
+                                                {slider.imagedata}
                                             </div>
                                         </div>
                                     )
